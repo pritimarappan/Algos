@@ -1,0 +1,43 @@
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+int main(int argc, char* argv[]){
+ 
+  int i=0;
+  int charSet[256];
+  long bitVector[4];
+  
+  
+  if(argc < 2){
+  cout << "Please enter input string" << "\n" ;
+  return 0;
+  }
+    
+  char* str = argv[1];
+  
+  for(int j=0; j<4; j++)
+    bitVector[j] = 0;
+  long t1 = 1;
+  
+    
+  while(str[i] != '\0'){
+    
+    int asciiVal = (int)str[i];
+    int bitArrayElement = asciiVal/64;
+    int bitPosition = asciiVal % 64;
+    long checker = 1;
+        
+    if(bitVector[bitArrayElement] & (checker << bitPosition)){      
+      cout << "Input does not have unique characters \n" << endl;
+      return 1;
+    }
+    else{
+      bitVector[bitArrayElement] |= (checker << bitPosition);
+    }
+    i++;
+  }
+  cout << "Input has unique chars " << endl;
+}
